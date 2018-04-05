@@ -1,0 +1,46 @@
+<form>
+    Pick a View or your ToDo!
+    <input type="radio" ng-model="viewType" value="standard">Standard
+    <input type="radio" ng-model="viewType" value="priority">Priority
+</form>
+<div>
+    <!--<div ng-switch="viewType">
+    <div ng-switch-when="standard">-->
+    <ul class="tasks">
+        <li *ngFor="let task of tasks">
+            <a routerLink="/detail/{{task.priority}}">
+                <span class="badge">{{task.priority}}</span> {{task.name}}
+            </a>
+            <button class="delete" title="delete task" (click)="delete(task)">x</button>
+        </li>
+    </ul>
+    <!-- <ul class="tasks">
+        <li *ngFor="let task of tasks">
+            <a routerLink="/detail/{{task.priority}}">
+                <span clas="badge">{{task.priority}} </span>{{task.name}}
+                <input [(ngModel)]="task.priority" placeholder="priority" />
+                <input [(ngModel)]="task.name" placeholder="name" />
+            </a>
+        </li>
+    </ul> -->
+    <!--</div>
+    <div ng-switch-when="priority">
+        <ul class="tasks">
+            <li *ngFor="let task of tasks">
+                <input [(ngModel)]="task.priority" placeholder="priority" />
+                <input [(ngModel)]="task.name" placeholder="name" />
+            </li>
+        </ul>
+    </div>
+</div>-->
+</div>
+<div>
+    <label>Task name:
+        <input #taskName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(taskName.value); taskName.value=''">
+        add
+    </button>
+</div>
+<app-task-detail [task]="selectedTask"></app-task-detail>
