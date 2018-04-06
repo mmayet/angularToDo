@@ -1,4 +1,4 @@
 export class Task {
-	priority: number;
-	name: string;
+  id: number;
+  name: string;
 }

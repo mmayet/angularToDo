@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { Task } from '../task';
-import { TaskService }  from '../task.service';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -10,8 +12,9 @@ import { TaskService }  from '../task.service';
   styleUrls: ['./task-detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-  @Input() task: Task;
 
+	@Input() task: Task;
+	
   constructor(
   	private route: ActivatedRoute,
 	private taskService: TaskService,
@@ -23,15 +26,10 @@ export class TaskDetailComponent implements OnInit {
   }
 
   getTask(): void {
-    const priority = +this.route.snapshot.paramMap.get('priority');
-    this.taskService.getTask(priority)
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.taskService.getTask(id)
       .subscribe(task => this.task = task);
   }
-
-  save(): void {
-   this.taskService.updateTask(this.task)
-     .subscribe(() => this.goBack());
- }
 
   goBack(): void {
     this.location.back();
